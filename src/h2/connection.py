@@ -880,7 +880,7 @@ class H2Connection:
         """
         self.config.logger.debug("End stream ID %d", stream_id)
         self.state_machine.process_input(ConnectionInputs.SEND_DATA)
-        frames = self.streams[stream_id].end_stream()
+        frames = self._get_stream_by_id(stream_id).end_stream()
         self._prepare_for_sending(frames)
 
     def increment_flow_control_window(self, increment, stream_id=None):
